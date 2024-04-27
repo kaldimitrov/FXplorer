@@ -21,7 +21,7 @@ public class CurrencyService {
         return currencyRepository.save(currency);
     }
 
-    public Optional<Currency> findById(Long id) {
-        return currencyRepository.findById(id);
+    public Optional<Currency> findByCode(String code) {
+        return currencyRepository.findByCode(code);
     }
 }
