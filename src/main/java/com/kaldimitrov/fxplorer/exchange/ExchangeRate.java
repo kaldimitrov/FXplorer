@@ -1,10 +1,15 @@
 package com.kaldimitrov.fxplorer.exchange;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.kaldimitrov.fxplorer.currency.Currency;
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -28,11 +33,17 @@ public class ExchangeRate {
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "source_currency_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Currency sourceCurrency;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "target_currency_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Currency targetCurrency;
+
+    @JsonBackReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exchangeRate")
+    private Set<ExchangeHistory> exchangeHistories = new HashSet<>();
 }
