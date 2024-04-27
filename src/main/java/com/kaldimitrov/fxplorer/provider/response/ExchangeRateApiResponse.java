@@ -1,4 +1,4 @@
-package com.kaldimitrov.fxplorer.rateprovider.response;
+package com.kaldimitrov.fxplorer.provider.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Setter;

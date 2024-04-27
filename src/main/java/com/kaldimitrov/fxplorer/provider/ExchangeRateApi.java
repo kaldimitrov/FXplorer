@@ -1,8 +1,7 @@
-package com.kaldimitrov.fxplorer.rateprovider.providers;
+package com.kaldimitrov.fxplorer.provider;
 
 import com.kaldimitrov.fxplorer.exception.ExchangeRateException;
-import com.kaldimitrov.fxplorer.rateprovider.ExchangeRateService;
-import com.kaldimitrov.fxplorer.rateprovider.response.ExchangeRateApiResponse;
+import com.kaldimitrov.fxplorer.provider.response.ExchangeRateApiResponse;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.kaldimitrov.fxplorer.rateprovider;
+package com.kaldimitrov.fxplorer.provider;
 
 import com.kaldimitrov.fxplorer.exception.ExchangeRateException;
 
