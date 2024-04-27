@@ -1,9 +1,9 @@
-package com.kaldimitrov.fxplorer.rateprovider;
+package com.kaldimitrov.fxplorer.provider;
 
 import com.kaldimitrov.fxplorer.exception.ExchangeRateException;
 
-import java.util.Map;
 import java.math.BigDecimal;
+import java.util.Map;
 
 public interface ExchangeRateService {
     /**
