@@ -1,5 +1,6 @@
 package com.kaldimitrov.fxplorer.currency;
 
+import com.kaldimitrov.fxplorer.currency.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,6 @@ public class CurrencyService {
 
     public List<Currency> findAll() {
         return currencyRepository.findAll();
-    }
-
-    public Currency save(Currency currency) {
-        return currencyRepository.save(currency);
     }
 
     public Optional<Currency> findByCode(String code) {

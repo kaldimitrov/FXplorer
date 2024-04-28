@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.kaldimitrov.fxplorer.currency.Currency;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "exchange_rates")
+@NoArgsConstructor
 public class ExchangeRate {
 
     @Id
@@ -46,4 +48,11 @@ public class ExchangeRate {
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exchangeRate")
     private Set<ExchangeHistory> exchangeHistories = new HashSet<>();
+
+    ExchangeRate(Long sourceCurrencyId, Long targetCurrencyId, BigDecimal rate) {
+        this.sourceCurrencyId = sourceCurrencyId;
+        this.targetCurrencyId = targetCurrencyId;
+        this.rate = rate;
+        this.date = new Date();
+    }
 }
