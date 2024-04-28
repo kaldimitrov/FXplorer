@@ -1,4 +1,4 @@
-package com.kaldimitrov.fxplorer.exchange;
+package com.kaldimitrov.fxplorer.exchange.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -37,7 +37,7 @@ public class ExchangeHistory {
     @JoinColumn(name = "exchange_rate_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ExchangeRate exchangeRate;
 
-    ExchangeHistory (Long exchangeRateId, BigDecimal input, BigDecimal output) {
+    public ExchangeHistory(Long exchangeRateId, BigDecimal input, BigDecimal output) {
         this.exchangeRateId = exchangeRateId;
         this.input = input;
         this.output = output;

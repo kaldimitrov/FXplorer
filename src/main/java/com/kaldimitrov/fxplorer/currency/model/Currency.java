@@ -1,4 +1,4 @@
-package com.kaldimitrov.fxplorer.currency;
+package com.kaldimitrov.fxplorer.currency.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.kaldimitrov.fxplorer.exchange.repository;
 
-import com.kaldimitrov.fxplorer.exchange.ExchangeRate;
+import com.kaldimitrov.fxplorer.exchange.model.ExchangeRate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

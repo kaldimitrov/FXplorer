@@ -1,13 +1,15 @@
 package com.kaldimitrov.fxplorer.exchange;
 
-import com.kaldimitrov.fxplorer.currency.Currency;
 import com.kaldimitrov.fxplorer.currency.CurrencyService;
+import com.kaldimitrov.fxplorer.currency.model.Currency;
 import com.kaldimitrov.fxplorer.exception.ExchangeRateException;
+import com.kaldimitrov.fxplorer.exchange.model.ExchangeHistory;
+import com.kaldimitrov.fxplorer.exchange.model.ExchangeRate;
 import com.kaldimitrov.fxplorer.exchange.repository.ExchangeHistoryRepository;
 import com.kaldimitrov.fxplorer.exchange.repository.ExchangeRateRepository;
 import com.kaldimitrov.fxplorer.exchange.request.ExchangeHistoryRequest;
-import com.kaldimitrov.fxplorer.provider.ExchangeRateApi;
-import com.kaldimitrov.fxplorer.provider.ExchangeRateService;
+import com.kaldimitrov.fxplorer.provider.ExchangeRateProviderApi;
+import com.kaldimitrov.fxplorer.provider.ExchangeRateProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
@@ -23,16 +25,13 @@ import java.util.*;
 @ComponentScan
 public class ExchangeService {
 
+    private final ExchangeRateProviderService exchangeRateProviderService = new ExchangeRateProviderApi();
     @Autowired
     private ExchangeRateRepository exchangeRateRepository;
-
     @Autowired
     private ExchangeHistoryRepository exchangeHistoryRepository;
-
     @Autowired
     private CurrencyService currencyService;
-
-    private final ExchangeRateService exchangeRateService = new ExchangeRateApi();
 
     public Optional<ExchangeRate> getExchangeRate(String baseCurrencyCode, String targetCurrencyCode) throws ExchangeRateException {
         Optional<Currency> baseCurrency = currencyService.findByCode(baseCurrencyCode);
@@ -50,18 +49,12 @@ public class ExchangeService {
             return rate;
         }
 
-        Map<String, BigDecimal> rates = exchangeRateService.fetchExchangeRates(baseCurrencyCode);
+        Map<String, BigDecimal> rates = exchangeRateProviderService.fetchExchangeRates(baseCurrencyCode);
         if (rates.get(targetCurrencyCode) == null) {
             throw new ExchangeRateException("No currency found for code " + targetCurrencyCode);
         }
 
-        Map<String, Long> currencyMap = new HashMap<>();
-        List<Currency> currencies = currencyService.findAll();
-        for (Currency currency : currencies) {
-            String code = currency.getCode();
-            currencyMap.put(code, currency.getId());
-        }
-
+        Map<String, Long> currencyMap = currencyService.createCurrencyMap(currencyService.findAll());
         for (Map.Entry<String, BigDecimal> entry : rates.entrySet()) {
             try {
                 exchangeRateRepository.save(new ExchangeRate(baseCurrency.get().getId(), currencyMap.get(entry.getKey()), entry.getValue()));

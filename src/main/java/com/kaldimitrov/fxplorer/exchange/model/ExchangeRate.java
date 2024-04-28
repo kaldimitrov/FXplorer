@@ -1,8 +1,8 @@
-package com.kaldimitrov.fxplorer.exchange;
+package com.kaldimitrov.fxplorer.exchange.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.kaldimitrov.fxplorer.currency.Currency;
+import com.kaldimitrov.fxplorer.currency.model.Currency;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,7 +49,7 @@ public class ExchangeRate {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exchangeRate")
     private Set<ExchangeHistory> exchangeHistories = new HashSet<>();
 
-    ExchangeRate(Long sourceCurrencyId, Long targetCurrencyId, BigDecimal rate) {
+    public ExchangeRate(Long sourceCurrencyId, Long targetCurrencyId, BigDecimal rate) {
         this.sourceCurrencyId = sourceCurrencyId;
         this.targetCurrencyId = targetCurrencyId;
         this.rate = rate;

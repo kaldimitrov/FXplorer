@@ -1,6 +1,7 @@
 package com.kaldimitrov.fxplorer.exchange;
 
 import com.kaldimitrov.fxplorer.exception.ExchangeRateException;
+import com.kaldimitrov.fxplorer.exchange.model.ExchangeHistory;
 import com.kaldimitrov.fxplorer.exchange.request.ConvertRequest;
 import com.kaldimitrov.fxplorer.exchange.request.ExchangeHistoryRequest;
 import com.kaldimitrov.fxplorer.exchange.response.RateResponse;
