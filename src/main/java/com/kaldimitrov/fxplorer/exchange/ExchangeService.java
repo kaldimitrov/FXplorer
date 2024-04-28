@@ -70,7 +70,7 @@ public class ExchangeService {
             }
         }
 
-        return rate;
+        return exchangeRateRepository.findOneBySourceCurrencyIdAndTargetCurrencyIdAndDate(baseCurrency.get().getId(), targetCurrency.get().getId(), new Date());
     }
 
     public ExchangeHistory convertAmount(BigDecimal amount, String baseCurrencyCode, String targetCurrencyCode) throws ExchangeRateException {

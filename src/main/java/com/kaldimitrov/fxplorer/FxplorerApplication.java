@@ -9,5 +9,4 @@ public class FxplorerApplication {
     public static void main(String[] args) {
         SpringApplication.run(FxplorerApplication.class, args);
     }
-
 }
