@@ -5,7 +5,7 @@ import com.kaldimitrov.fxplorer.exception.ExchangeRateException;
 import java.math.BigDecimal;
 import java.util.Map;
 
-public interface ExchangeRateService {
+public interface ExchangeRateProviderService {
     /**
      * Fetches exchange rates for the given base currency.
      *

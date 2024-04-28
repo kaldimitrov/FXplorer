@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.util.Map;
 
-public class ExchangeRateApi implements ExchangeRateService {
+public class ExchangeRateProviderApi implements ExchangeRateProviderService {
 
     @Override
     public Map<String, BigDecimal> fetchExchangeRates(String baseCurrency) throws ExchangeRateException {

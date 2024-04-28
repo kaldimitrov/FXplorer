@@ -1,6 +1,6 @@
 package com.kaldimitrov.fxplorer.currency.repository;
 
-import com.kaldimitrov.fxplorer.currency.Currency;
+import com.kaldimitrov.fxplorer.currency.model.Currency;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
