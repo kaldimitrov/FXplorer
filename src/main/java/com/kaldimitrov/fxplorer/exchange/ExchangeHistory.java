@@ -1,8 +1,9 @@
 package com.kaldimitrov.fxplorer.exchange;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "exchange_history")
+@NoArgsConstructor
 public class ExchangeHistory {
 
     @Id
@@ -30,8 +32,15 @@ public class ExchangeHistory {
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "exchange_rate_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ExchangeRate exchangeRate;
+
+    ExchangeHistory (Long exchangeRateId, BigDecimal input, BigDecimal output) {
+        this.exchangeRateId = exchangeRateId;
+        this.input = input;
+        this.output = output;
+        this.createdAt = LocalDateTime.now();
+    }
 }
